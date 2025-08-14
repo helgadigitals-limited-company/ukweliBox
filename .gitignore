@@ -81,6 +81,7 @@ web_modules/
 .env.production.local
 .env.local
 
+client/.env
 server/.env
 server/.env
 
