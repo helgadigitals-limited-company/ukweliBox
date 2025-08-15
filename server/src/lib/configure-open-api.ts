@@ -1,4 +1,4 @@
-import type { AppOpenAPI } from './types'
+import type { AppOpenAPI } from '@/lib/types.js'
 
 import { Scalar } from '@scalar/hono-api-reference'
 
@@ -18,7 +18,7 @@ export default function configureOpenAPI(app: AppOpenAPI) {
     Scalar({
       url: '/doc',
       theme: 'kepler',
-      layout: 'classic',
+      layout: 'modern',
       defaultHttpClient: {
         targetKey: 'js',
         clientKey: 'fetch',

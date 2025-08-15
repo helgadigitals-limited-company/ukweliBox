@@ -1,64 +1,67 @@
-import { sql } from 'drizzle-orm'
-import { boolean, integer, pgTable, serial, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core'
+import {
+	pgTable,
+	text,
+	timestamp,
+	boolean,
+	integer,
+} from "drizzle-orm/pg-core";
 
-export const users = pgTable('users', {
-  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  name: varchar('name', { length: 255 }).notNull(),
-  email: varchar('email', { length: 255 }).unique(),
-  phone_number: varchar('phone_number', { length: 50 }),
-  created_at: timestamp('created_at').defaultNow(),
-})
+export const user = pgTable("user", {
+	id: text("id").primaryKey(),
+	name: text("name").notNull(),
+	email: text("email").notNull().unique(),
+	emailVerified: boolean("email_verified")
+		.$defaultFn(() => false)
+		.notNull(),
+	image: text("image"),
+	createdAt: timestamp("created_at")
+		.$defaultFn(() => /* @__PURE__ */ new Date())
+		.notNull(),
+	updatedAt: timestamp("updated_at")
+		.$defaultFn(() => /* @__PURE__ */ new Date())
+		.notNull(),
+});
 
-export const admins = pgTable('admins', {
-  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  username: varchar('username', { length: 255 }).notNull().unique(),
-  password_hash: varchar('password_hash', { length: 255 }).notNull(),
-  created_at: timestamp('created_at').defaultNow(),
-})
+export const session = pgTable("session", {
+	id: text("id").primaryKey(),
+	expiresAt: timestamp("expires_at").notNull(),
+	token: text("token").notNull().unique(),
+	createdAt: timestamp("created_at").notNull(),
+	updatedAt: timestamp("updated_at").notNull(),
+	ipAddress: text("ip_address"),
+	userAgent: text("user_agent"),
+	userId: text("user_id")
+		.notNull()
+		.references(() => user.id, { onDelete: "cascade" }),
+});
 
-export const submissionTypes = pgTable('submission_types', {
-  id: serial('id').primaryKey(),
-  name: varchar('name', { length: 100 }).notNull().unique(),
-})
+export const account = pgTable("account", {
+	id: text("id").primaryKey(),
+	accountId: text("account_id").notNull(),
+	providerId: text("provider_id").notNull(),
+	userId: text("user_id")
+		.notNull()
+		.references(() => user.id, { onDelete: "cascade" }),
+	accessToken: text("access_token"),
+	refreshToken: text("refresh_token"),
+	idToken: text("id_token"),
+	accessTokenExpiresAt: timestamp("access_token_expires_at"),
+	refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
+	scope: text("scope"),
+	password: text("password"),
+	createdAt: timestamp("created_at").notNull(),
+	updatedAt: timestamp("updated_at").notNull(),
+});
 
-export const submissionStatus = pgTable('submission_status', {
-  id: serial('id').primaryKey(),
-  status_name: varchar('status_name', { length: 50 }).notNull().unique(),
-})
-
-export const submissions = pgTable('submissions', {
-  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  user_id: uuid('user_id').notNull(),
-  submission_type_id: integer('submission_type_id').notNull(),
-  title: varchar('title', { length: 255 }),
-  description: text('description').notNull(),
-  priority: integer('priority').default(0),
-  status_id: integer('status_id').references(() => submissionStatus.id),
-  created_at: timestamp('created_at').defaultNow(),
-  updated_at: timestamp('updated_at').defaultNow(),
-})
-
-export const submissionFiles = pgTable('submission_files', {
-  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  submission_id: uuid('submission_id').notNull().references(() => submissions.id),
-  file_name: varchar('file_name', { length: 255 }).notNull(),
-  file_type: varchar('file_type', { length: 50 }).notNull(),
-  file_url: text('file_url').notNull(),
-  created_at: timestamp('created_at').defaultNow(),
-})
-
-export const feedbackResponses = pgTable('feedback_responses', {
-  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  submission_id: uuid('submission_id').notNull().references(() => submissions.id),
-  admin_id: uuid('admin_id').notNull().references(() => admins.id),
-  message: text('message').notNull(),
-  created_at: timestamp('created_at').defaultNow(),
-})
-
-export const notifications = pgTable('notifications', {
-  id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
-  user_id: uuid('user_id').notNull().references(() => users.id),
-  message: text('message').notNull(),
-  read: boolean('read').default(false),
-  created_at: timestamp('created_at').defaultNow(),
-})
+export const verification = pgTable("verification", {
+	id: text("id").primaryKey(),
+	identifier: text("identifier").notNull(),
+	value: text("value").notNull(),
+	expiresAt: timestamp("expires_at").notNull(),
+	createdAt: timestamp("created_at").$defaultFn(
+		() => /* @__PURE__ */ new Date(),
+	),
+	updatedAt: timestamp("updated_at").$defaultFn(
+		() => /* @__PURE__ */ new Date(),
+	),
+});

@@ -1,6 +1,6 @@
 import { defineConfig } from 'drizzle-kit'
 
-import env from '@/env'
+import env from './src/env'
 
 export default defineConfig({
   schema: './src/db/schema.ts',
@@ -9,6 +9,5 @@ export default defineConfig({
   casing: 'snake_case',
   dbCredentials: {
     url: env.DATABASE_URL,
-
   },
 })
