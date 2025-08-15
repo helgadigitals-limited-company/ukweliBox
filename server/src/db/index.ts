@@ -1,15 +1,17 @@
-import { drizzle } from 'drizzle-orm/libsql'
+import { drizzle } from 'drizzle-orm/node-postgres'
+import { Pool } from 'pg'
+import env from '@/env.js'
+import * as schema from '@/db/schema.js'
 
-import env from '@/env'
 
-import * as schema from './schema'
+export const pool = new Pool({
+	connectionString: env.DATABASE_URL,
+	max: 10,
+	idleTimeoutMillis: 30000,
+})
 
-const db = drizzle({
-  connection: {
-    url: env.DATABASE_URL,
-  },
-  casing: 'snake_case',
-  schema,
+const db = drizzle(pool, {
+	schema, casing: 'snake_case'
 })
 
 export default db
