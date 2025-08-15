@@ -12,8 +12,11 @@ import { useAuth } from "./AuthContext"
 import {toast} from "sonner"
 
 const loginformSchema = z.object({
-  username: z.string().min(1,{
-    message:"username is required"
+  email: z
+  .string()
+  .min(1,{message:"Email is required"})
+  .refine((val)=> val.endsWith("@helgadigitals.co.tz"),{
+    message:"Email must end with @helgadigitals.co.tz",
   }),
   password:z.string().min(2,{
     message:"Password is required"
@@ -30,13 +33,13 @@ export default function Admin(){
   const form = useForm<loginformValues>({
     resolver: zodResolver(loginformSchema),
     defaultValues: {
-      username:"",
+      email:"",
       password:"",
     },
   })
 
     const onSubmit = (values: loginformValues)=>{
-      if(login(values.username, values.password)){
+      if(login(values.email, values.password)){
         toast.success('Login successfully')
         navigate("/admin")
       }else {
@@ -61,10 +64,10 @@ export default function Admin(){
 
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input 
                 className="w-full"

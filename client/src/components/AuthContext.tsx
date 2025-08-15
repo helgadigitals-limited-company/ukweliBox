@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react"
 
 interface AuthContextType {
   isAdmin: boolean;
-  login: (username: string, password: string ) => boolean;
+  login: (email: string, password: string ) => boolean;
   logout: () => void;
 }
 
@@ -14,8 +14,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> =({ children })
 
   const [isAdmin, setIsAdmin] = useState(false)
 
-  const login = (username: string, password: string) => {
-    if(username === "admin980" && password === "9801234"){
+  const login = (email: string, password: string) => {
+    if(email === "admin9@helgadigitals.co.tz" && password === "9801234"){
       setIsAdmin(true)
       return true
     }
