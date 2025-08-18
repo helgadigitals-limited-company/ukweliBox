@@ -143,3 +143,8 @@ dist
 *.iml
 out
 gen
+
+
+
+client/.DS_Store
+server/.DS_Store
