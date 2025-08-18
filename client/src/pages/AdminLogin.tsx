@@ -8,7 +8,7 @@ import {Card,CardContent,CardFooter,CardHeader,CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "./AuthContext"
+import { useAuth } from "../components/AuthContext"
 import {toast} from "sonner"
 
 const loginformSchema = z.object({
@@ -18,8 +18,8 @@ const loginformSchema = z.object({
   .refine((val)=> val.endsWith("@helgadigitals.co.tz"),{
     message:"Email must end with @helgadigitals.co.tz",
   }),
-  password:z.string().min(2,{
-    message:"Password is required"
+  password:z.string().min(8,{
+    message:"Password must be at least 8 characters"
   })
 })
 
@@ -43,7 +43,7 @@ export default function Admin(){
         toast.success('Login successfully')
         navigate("/admin")
       }else {
-        toast("Login Failed",{
+        toast.error("Login Failed",{
           description:"Invalid username or password"
         })
       }

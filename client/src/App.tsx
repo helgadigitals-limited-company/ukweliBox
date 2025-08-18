@@ -1,31 +1,68 @@
 import Header from "./components/Header"
-import FeedbackForm from "./components/FeedbackForm"
-import AdminLogin from "./components/AdminLogin"
-import NotFoundPage from "./components/NotFoundPage"
+import FeedbackForm from "./pages/FeedbackForm"
+import AdminLogin from "./pages/AdminLogin"
+import NotFoundPage from "./pages/NotFoundPage"
 import ProtectedRoute from "./components/ProtectedRoute"
-import AdminPage from "./components/AdminPage"
+import AdminPage from "./pages/AdminPage"
+import AdminHeader from "./components/AdminHeader"
+import { useAuth } from "./components/AuthContext"
 import { AuthProvider } from "./components/AuthContext"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from "sonner"
+
+function WithHeader({children}: {children: React.ReactNode }) {
+  return (
+    <>
+     <Header slogan/>
+     {children}
+    </>
+  )
+}
+
+function WithAdminHeader({children}: {children: React.ReactNode}) {
+  const { adminName } = useAuth()
+  return(
+    <>
+      <AdminHeader adminName={adminName ?? "Admin"}/>
+      {children}
+    </>
+  )
+}
+
+
+
 export default function App() {
   
  const router = createBrowserRouter([
   {
     path: '/',
-    element: <FeedbackForm/>,
-    errorElement:<NotFoundPage/>
+    element: (
+      <WithHeader>
+          <FeedbackForm/>
+      </WithHeader>
+    ),
   },
   {
     path:'/admin-login',
-    element: <AdminLogin/>
+    element:(
+      <WithHeader>
+          <AdminLogin/>
+      </WithHeader>
+  )
     
+  },
+  {
+    path:'*',
+    element:<NotFoundPage/>
   },
   {
      path:'/admin',
      element: (
-     <ProtectedRoute>
-      <AdminPage/>
-    </ProtectedRoute>
+        <ProtectedRoute>
+          <WithAdminHeader>
+             <AdminPage/>
+          </WithAdminHeader> 
+        </ProtectedRoute>
      )
   }
 ])
@@ -36,9 +73,8 @@ export default function App() {
   return (
     <>
     <AuthProvider>
-    <Header />
-    <RouterProvider router={router} />
-    <Toaster position="top-center"/>
+      <RouterProvider router={router} />
+      <Toaster position="top-center"/>
     </AuthProvider>
     </>
   )
