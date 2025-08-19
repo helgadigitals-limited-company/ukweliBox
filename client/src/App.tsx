@@ -1,5 +1,5 @@
 import Header from "./components/Header"
-import FeedbackForm from "./pages/CustomerFeedbackPage"
+import CustomerFeedbackPage from "./pages/CustomerFeedbackPage"
 import AdminLogin from "./pages/AdminLoginPage"
 import NotFoundPage from "./pages/NotFoundPage"
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -10,7 +10,7 @@ import { AuthProvider } from "./components/AuthContext"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from "sonner"
 
-function WithHeader({children}: {children: React.ReactNode }) {
+function ClientLayout({children}: {children: React.ReactNode }) {
   return (
     <>
      <Header slogan/>
@@ -19,7 +19,7 @@ function WithHeader({children}: {children: React.ReactNode }) {
   )
 }
 
-function WithAdminHeader({children}: {children: React.ReactNode}) {
+function AdminLayout({children}: {children: React.ReactNode}) {
   const { adminName } = useAuth()
   return(
     <>
@@ -37,17 +37,17 @@ export default function App() {
   {
     path: '/',
     element: (
-      <WithHeader>
-          <FeedbackForm/>
-      </WithHeader>
+      <ClientLayout>
+          <CustomerFeedbackPage/>
+      </ClientLayout>
     ),
   },
   {
     path:'/admin-login',
     element:(
-      <WithHeader>
+      <ClientLayout>
           <AdminLogin/>
-      </WithHeader>
+      </ClientLayout>
   )
     
   },
@@ -59,9 +59,9 @@ export default function App() {
      path:'/admin',
      element: (
         <ProtectedRoute>
-          <WithAdminHeader>
+          <AdminLayout>
              <AdminPage/>
-          </WithAdminHeader> 
+          </AdminLayout> 
         </ProtectedRoute>
      )
   }
