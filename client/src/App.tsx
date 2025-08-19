@@ -3,7 +3,7 @@ import AdminLogin from "./pages/AdminLoginPage"
 import NotFoundPage from "./pages/NotFoundPage"
 import ProtectedRoute from "./components/ProtectedRoute"
 import AdminPage from "./pages/AdminPage"
-import { AdminLayout } from "./Layouts/AdminLayout"
+import  AdminLayout  from "./Layouts/AdminLayout"
 import { ClientLayout } from "./Layouts/ClientLayout"
 import { AuthProvider } from "./components/AuthContext"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'

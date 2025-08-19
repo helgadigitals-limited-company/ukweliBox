@@ -40,7 +40,9 @@ export default function Admin(){
 
     const onSubmit = (values: loginformValues)=>{
       if(login(values.email, values.password)){
-        toast.success('Login successfully')
+        toast.success("Login Successful", {
+          description: `Welcome ${values.email.split("@")[0]}`
+        })
         navigate("/admin")
       }else {
         toast.error("Login Failed",{
