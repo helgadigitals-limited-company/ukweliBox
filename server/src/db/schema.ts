@@ -65,3 +65,41 @@ export const verification = pgTable("verification", {
 		() => /* @__PURE__ */ new Date(),
 	),
 });
+
+
+export const feedback = pgTable("feedback", {
+	id: text("id").primaryKey(),
+	fullname: text("fullname").notNull(),
+	gender: text("gender").notNull(),
+	phoneNo: text("phoneNo").notNull(),
+	email: text("email"),
+	feedbackTypeId: text("feedbackType").notNull().references(() => feedbackType.id, { onDelete: "cascade" }),
+	message: text("message").notNull(),
+	attachmentId: text("attachmentId").references(() => attachment.id, { onDelete: "set null" }),
+	responseId: text("responseId").references(() => response.id, { onDelete: "set null" }),
+	createdAt: timestamp("created_at").notNull(),
+})
+
+export const feedbackType = pgTable("feedbackType", {
+	id: text("id").primaryKey(),
+	feedbackType: text("feedbackType").notNull(),
+	createdAt: timestamp("created_at").notNull(),
+	updatedAt: timestamp("updated_at").notNull(),
+})
+
+
+export const attachment = pgTable("attachment", {
+	id: text("id").primaryKey(),
+	attachmentUrl: text("attachmentUrl").notNull(),
+	attachmentName: text("attachmentName").notNull(),
+	attachmentType: text("attachmentType").notNull(),
+	createdAt: timestamp("created_at").notNull(),
+	updatedAt: timestamp("updated_at").notNull(),
+})
+
+export const response = pgTable("response", {
+	id: text("id").primaryKey(),
+	response: text("response").notNull(),
+	userId: text("userId").notNull().references(() => user.id, { onDelete: "cascade" }),
+	createdAt: timestamp("created_at").notNull(),
+})
