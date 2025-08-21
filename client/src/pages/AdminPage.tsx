@@ -1,13 +1,14 @@
 import OverviewBubbles from "@/components/OverviewBubbles"
+import DashboardChart from "@/components/DashboardChart"
 
 export default function AdminPage(){
 
   
    return (
-   <>
-   <h1 className="text-3xl font-bold text-center mt-6">Overview</h1>
+   <div className="flex flex-col items-center justify-center gap-50 ml-50">
    <OverviewBubbles/>
-   </>
+   <DashboardChart/>
+   </div>
    )
   
 }

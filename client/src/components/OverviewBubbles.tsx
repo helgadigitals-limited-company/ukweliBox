@@ -1,29 +1,30 @@
-
-
 import { Card, CardContent } from "@/components/ui/card"
 
 
 export default function OverviewBubbles() {
      const items = [
      { label: "Suggestions", 
-       value: 20, 
-       color: "bg-purple-400" 
+       value: 8, 
+       color: "bg-[var(--color-custom)]" 
      },
      { label: "Alerts",
-       value: 40, 
-       color: "bg-cyan-400"
+       value: 5, 
+       color: "bg-[var(--color-custom1)]"
        },
       { label: "Complaints",
-       value: 100, 
-       color: "bg-orange-400" 
+       value: 15, 
+       color: "bg-[var(--color-custom2)]" 
       },
     { label: "Compliments", 
-      value: 65, 
-      color: "bg-indigo-400" 
+      value: 3, 
+      color: "bg-[var(--color-custom3)]" 
     },
   ]
   return(
+    <div>
+    <h1 className="text-3xl font-bold text-center mt-6">Feeback Daily Overview</h1>
      <div className="relative flex flex-wrap justify-center gap-6 mt-6 ml-4 mr-10">
+      
       {items.map((item, i) => (
         <Card
           key={i}
@@ -35,6 +36,7 @@ export default function OverviewBubbles() {
           </CardContent>
         </Card>
       ))}
+    </div>
     </div>
   )
 }
