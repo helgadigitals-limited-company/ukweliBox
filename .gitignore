@@ -144,7 +144,6 @@ dist
 out
 gen
 
-
-
+# macOS system files
 client/.DS_Store
 server/.DS_Store
