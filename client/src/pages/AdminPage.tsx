@@ -6,9 +6,11 @@ export default function AdminPage(){
 
   
    return (
-   <div className="flex flex-col items-center justify-center gap-50 ml-50">
+   <div className="flex flex-col items-center justify-center gap-15 ml-20">
    <FeedbackDailyOverview title="Feedback Daily Overview" items={FeedbackDailyData}/>
+   <div className="w-250">
    <DashboardChart/>
+   </div>
    </div>
    )
   

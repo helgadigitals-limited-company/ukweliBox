@@ -129,8 +129,8 @@ export default function DashboardChart() {
         <ChartLegend content={<ChartLegendContent />} />
         <Bar dataKey="Suggestions" fill="var(--color-Suggestions)" radius={2} />
         <Bar dataKey="Alerts" fill="var(--color-Alerts)" radius={2} />
-        <Bar dataKey="Complaints" fill="var(--color-Complaints)" radius={2} />
-        <Bar dataKey="Compliments" fill="var(--color-Compliments)" radius={2}/>
+        <Bar dataKey="Complaints" fill="var(--color-Complaints)" radius={2}  />
+        <Bar dataKey="Compliments" fill="var(--color-Compliments)" radius={2} />
       </BarChart>
     </ChartContainer>
 

@@ -8,7 +8,7 @@ interface FeedbackDataItemProps {
 export default function FeedbackDailyOverview({title="Feedback Daily Overview",items}:FeedbackDataItemProps) {
   return(
      <div>
-      <h1 className="text-3xl font-bold text-center mt-6">{title}</h1>
+      <h1 className="text-3xl font-bold text-center mt-2">{title}</h1>
       <div className="relative flex flex-wrap justify-center gap-6 mt-6 ml-4 mr-10">
         {items.map((item, i) => (
           <Card
