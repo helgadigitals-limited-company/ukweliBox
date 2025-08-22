@@ -8,14 +8,14 @@ import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
   const chartData = [
   { 
     month: "January", 
-    Suggestions: 54, 
+    Suggestions: 47, 
     Alerts: 10,
-    Complaints: 50,
+    Complaints: 46,
     Compliments: 30,
   },
   { 
     month: "February", 
-    Suggestions: 56, 
+    Suggestions: 45, 
     Alerts: 8,
     Complaints: 20,
     Compliments: 15,

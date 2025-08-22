@@ -18,11 +18,14 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
+import  { ServicesOffered } from "@/lib/services"
+import {FeedbackTypes} from "@/lib/FeedbackType"
 
 
 const onboardingPersonSchema = onboardingSchema.pick({
   fullname:true,
   gender:true,
+  service:true,
   phoneNo: true,
   Email:true,
   feedbackType: true,
@@ -41,9 +44,10 @@ export default function FeedbackForm(){
     defaultValues: {
       fullname:"",
       gender:undefined,
+      service:"",
       phoneNo:"+255",
       Email:"",
-      feedbackType: undefined,
+      feedbackType:"",
       message:"",
       attachment: undefined,
     },
@@ -162,6 +166,7 @@ export default function FeedbackForm(){
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="feedbackType"
@@ -174,42 +179,52 @@ export default function FeedbackForm(){
                   defaultValue={field.value}
                   className="flex flex-wrap gap-4"
                 >
-                  
-                  <FormItem className="flex items-center gap-2">
+                  {FeedbackTypes.map((types)=> 
+                  <FormItem key={types.id} className="flex items-center gap-2">
                     <FormControl>
-                      <RadioGroupItem value="suggestion" />
+                      <RadioGroupItem value={types.id} />
                     </FormControl>
                     <FormLabel className="font-normal">
-                      Pendekezo
+                      {types.value}
                     </FormLabel>
                   </FormItem>
-                  
-                  <FormItem className="flex items-center gap-2">
-                    <FormControl>
-                      <RadioGroupItem value="complaint" />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      Lalamiko
-                    </FormLabel>
-                  </FormItem>
-                   <FormItem className="flex items-center gap-2">
-                    <FormControl>
-                      <RadioGroupItem value="compliment"/>
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      Pongezi
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center gap-2">
-                    <FormControl>
-                      <RadioGroupItem value="alert" />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      Tahadhari
-                    </FormLabel>
-                  </FormItem>
+                  )}
                 </RadioGroup>
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="service"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex flex-col md:flex-row md:items-center md:gap-6">
+              <FormLabel className="min-w-[120px] mb-1 md:mb-0">
+                Huduma
+              </FormLabel>
+              <Select 
+              onValueChange={field.onChange} 
+              defaultValue={field.value}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Bofya hapa kuchagua Aina ya huduma uliyopata" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {ServicesOffered.map((service) => 
+                  <SelectItem value={service.id} key={service.id}>
+                    {service.value}
+                  </SelectItem>
+                  )}
+                </SelectContent>
+              </Select>
+              </div>
+              <FormDescription>
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -274,4 +289,5 @@ export default function FeedbackForm(){
     </div>
     </div>
   )
+
 }
