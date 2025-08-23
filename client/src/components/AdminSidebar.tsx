@@ -35,12 +35,12 @@ import {
 const items = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/",
     icon: LayoutDashboard,
   },
   {
     title: "Suggestions",
-    url: "#",
+    url: "/feedback/suggestions",
     icon: MessageSquareQuote,
   },
   {
