@@ -1,7 +1,8 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import AdminSidebar from "@/components/AdminSidebar"
+import { Outlet } from "react-router-dom"
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout() {
   
 
   return (
@@ -10,7 +11,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <AdminSidebar />
       <main>
         <SidebarTrigger />
-        {children}
+        <Outlet/>
       </main>
     </SidebarProvider>
     </>

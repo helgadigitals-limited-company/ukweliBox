@@ -1,6 +1,7 @@
 import  Image  from "../assets/Helga.jpg"
-import {  PartyPopper , TriangleAlert, CircleAlert, MessageSquareQuote, LayoutDashboard, User, LogOut, ChevronUp, Settings } from "lucide-react"
+import {  PartyPopper , TriangleAlert, BellRing, MessageSquareQuote, LayoutDashboard, User, LogOut, ChevronUp, Settings } from "lucide-react"
 import { useAuth } from "../components/AuthContext"
+import { NavLink } from "react-router-dom"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,36 +32,36 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-// Menu items.
+
 const items = [
   {
     title: "Dashboard",
-    url: "/",
+    url: "/admin/dashboard",
     icon: LayoutDashboard,
   },
   {
     title: "Suggestions",
-    url: "/feedback/suggestions",
+    url: "/admin/suggestions",
     icon: MessageSquareQuote,
   },
   {
     title: "Alerts",
-    url: "#",
-    icon: CircleAlert,
+    url: "/admin/alerts",
+    icon: BellRing,
   },
   {
     title: "Complaints",
-    url: "#",
+    url: "/admin/complaints",
     icon: TriangleAlert,
   },
    {
     title: "Compliments",
-    url: "#",
+    url: "/admin/compliments",
     icon: PartyPopper,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/admin/settings",
     icon: Settings,
   },
 ]
@@ -74,7 +75,7 @@ export default function AdminSidebar() {
           <img src={Image} alt="Admin Avatar" className="w-16 h-16" />
           <span className="font-semibold text-blue-800 text-xs">Innovate,Implement & Transform</span>
   
-          </div>
+        </div>
         <h1 className="text-lg font-semibold">Admin Panel</h1>
       </SidebarHeader>
       <SidebarContent>
@@ -84,10 +85,10 @@ export default function AdminSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <NavLink to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

@@ -3,6 +3,11 @@ import AdminLogin from "./pages/AdminLoginPage"
 import NotFoundPage from "./pages/NotFoundPage"
 import ProtectedRoute from "./components/ProtectedRoute"
 import AdminPage from "./pages/AdminPage"
+import SuggestionsPage from "./pages/SuggestionsPage"
+import AlertsPage from "./pages/AlertsPage"
+import ComplaintsPage from "./pages/ComplaintsPage"
+import ComplimentsPage from "./pages/ComplimentsPage"
+import SettingsPage from "./pages/SettingsPage"
 import  AdminLayout  from "./Layouts/AdminLayout"
 import { ClientLayout } from "./Layouts/ClientLayout"
 import { AuthProvider } from "./components/AuthContext"
@@ -24,7 +29,7 @@ export default function App() {
     path:'/admin-login',
     element:(
       <ClientLayout>
-          <AdminLogin/>
+       <AdminLogin/>
       </ClientLayout>
   )
     
@@ -37,11 +42,39 @@ export default function App() {
      path:'/admin',
      element: (
         <ProtectedRoute>
-          <AdminLayout>
-             <AdminPage/>
-          </AdminLayout> 
+          <AdminLayout/>
         </ProtectedRoute>
-     )
+     ),
+     children: [
+          {
+            index: true,
+            element: <AdminPage/>
+          },
+          {
+            path: 'dashboard',
+            element: <AdminPage/>
+          },
+          {
+            path: 'suggestions',
+            element: <SuggestionsPage/>
+          },
+          {
+            path: 'alerts',
+            element: <AlertsPage/>
+          },
+          {
+            path: 'complaints',
+            element: <ComplaintsPage/>
+          },
+          {
+            path: 'compliments',
+            element: <ComplimentsPage/>
+          },
+          {
+            path: 'settings',
+            element: <SettingsPage/>
+          }
+     ]
   }
 ])
 
