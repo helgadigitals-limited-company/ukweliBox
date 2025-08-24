@@ -51,7 +51,7 @@ export default function DashboardChart() {
       <div>
         <h2 className="text-lg font-semibold">Bar Chart</h2>
         <p className="text-2xl text-black-400">
-          Showing total feedbacks in the last year
+          Showing Total feedbacks in the last year
         </p>
       </div>
 
