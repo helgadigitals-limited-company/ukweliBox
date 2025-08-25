@@ -30,37 +30,38 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar
 } from "@/components/ui/sidebar"
 
 
 const items = [
   {
-    title: "Dashboard",
+    title: "DASHBOARD",
     url: "/admin/dashboard",
     icon: LayoutDashboard,
   },
   {
-    title: "Suggestions",
+    title: "SUGGESTIONS",
     url: "/admin/suggestions",
     icon: MessageSquareQuote,
   },
   {
-    title: "Alerts",
+    title: "ALERTS",
     url: "/admin/alerts",
     icon: BellRing,
   },
   {
-    title: "Complaints",
+    title: "COMPLAINTS",
     url: "/admin/complaints",
     icon: TriangleAlert,
   },
    {
-    title: "Compliments",
+    title: "COMPLIMENTS",
     url: "/admin/compliments",
     icon: PartyPopper,
   },
   {
-    title: "Settings",
+    title: "SETTINGS",
     url: "/admin/settings",
     icon: Settings,
   },
@@ -68,15 +69,21 @@ const items = [
 
 export default function AdminSidebar() {
   const { adminName, logout } = useAuth()
+  const { state } = useSidebar()
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarHeader>
-        <div className="flex items-center gap-2 p-4">
-          <img src={Image} alt="Admin Avatar" className="w-16 h-16" />
+        <div className="flex flex-col">
+          { state === "expanded" && (
+          <img src={Image} alt="Admin Avatar" className="flex justify-center w-25 h-25 ml-8" />
+         )}
+          { state === "expanded" && (
           <span className="font-semibold text-blue-800 text-xs">Innovate,Implement & Transform</span>
-  
+          )}
+          {state === "collapsed" && (
+            <img src={Image} alt="Admin Avatar" className="w-12 h-12" />
+          )}
         </div>
-        <h1 className="text-lg font-semibold">Admin Panel</h1>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -86,8 +93,8 @@ export default function AdminSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <NavLink to={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
+                      <item.icon className="w-4 h-4" strokeWidth={2.5}/>
+                      <span className="text-xs font-semibold">{item.title}</span>
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

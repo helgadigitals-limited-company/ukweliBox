@@ -1,6 +1,13 @@
 import type { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import { Button } from "./ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 export type Table = {
   id: string
   name: string
@@ -16,14 +23,26 @@ export const columns: ColumnDef<Table>[] = [
   {
     accessorKey: "name",
     header: "Name",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "date",
-    header: "Date",
+     header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Date
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "time",
-     header: ({ column }) => {
+    header: ({ column }) => {
       return (
         <Button
           variant="ghost"
@@ -34,22 +53,74 @@ export const columns: ColumnDef<Table>[] = [
         </Button>
       )
     },
+        sortingFn: (rowA, rowB, columnId) => {
+        const timeA = rowA.getValue<string>(columnId)
+        const timeB = rowB.getValue<string>(columnId)
+
+        const toMinutes = (t: string) => {
+          const [h, m] = t.split(":").map(Number)
+          return h * 60 + m
+        }
+
+        return toMinutes(timeA) - toMinutes(timeB)
+      },
+      enableGlobalFilter: true,
   },
   {
     accessorKey: "phone",
     header:"Phone",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "email",
     header: "Email",
+    enableGlobalFilter: true,
+  },
+   {
+    accessorKey: "service",
+    header: "Service",
+    enableGlobalFilter: true,
   },
   {
     accessorKey: "description",
     header: "Description",
+      cell: ({ row }) => {
+      const description = row.getValue("description") as string
+
+      return (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline" size="sm" className="border-0">
+              View
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Description</DialogTitle>
+            </DialogHeader>
+            <p>{description}</p>
+          </DialogContent>
+        </Dialog>
+      )
+    },
   },
   {
     accessorKey:"status",
-    header: "status"
+    header: "status",
+    cell: ({ row }) => {
+    const status = row.getValue("status") as string
+
+    let bgColor = ""
+    if (status === "Resolved") bgColor = "bg-green-200 text-green-800"
+    if (status === "Pending") bgColor = "bg-yellow-200 text-yellow-800"
+    if (status === "Closed") bgColor = "bg-red-200 text-red-800"
+
+    return (
+      <span className={`px-3 py-2 rounded text-1xl ${bgColor}`}>
+        {status}
+      </span>
+    )
+  },
   }
 ]
 

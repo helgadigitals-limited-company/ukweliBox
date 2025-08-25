@@ -46,7 +46,7 @@ export default function DashboardChart() {
   )
 
   return(
-  <div>
+  <div className="rounded-xl border p-6 text-foreground">
     <div className="mb-6 flex items-start justify-between">
       <div>
         <h2 className="text-lg font-semibold">Bar Chart</h2>
@@ -57,24 +57,24 @@ export default function DashboardChart() {
 
       <div className="grid grid-cols-2 gap-6 text-right">
         <div>
-          <p className="text-2xl text-[var(--color-custom)]">
+          <p className="text-1xl text-[var(--color-custom3)]">
             {chartConfig.Suggestions.label}
           </p>
-          <p className="text-2xl font-bold text-[var(--color-custom)]">
+          <p className="text-2xl font-bold text-[var(--color-custom3)]">
             {totals.Suggestions}
           </p>
         </div>
         <div>
-          <p className="text-2xl text-[var(--color-custom2)]">
+          <p className="text-1xl text-[var(--color-custom3)]">
             {chartConfig.Complaints.label}
           </p>
-          <p className="text-2xl font-bold text-[var(--color-custom2)]">
+          <p className="text-2xl font-bold text-[var(--color-custom3)]">
             {totals.Complaints}
           </p>
         </div>
         <div>
           <div>
-          <p className="text-2xl text-[var(--color-custom3)]">
+          <p className="text-1xl text-[var(--color-custom3)]">
             {chartConfig.Compliments.label}
           </p>
           <p className="text-2xl font-bold text-[var(--color-custom3)]">
@@ -83,10 +83,10 @@ export default function DashboardChart() {
         </div>
         </div>
         <div>
-          <p className="text-2xl text-[var(--color-custom1)]">
+          <p className="text-1xl text-[var(--color-custom3)]">
             {chartConfig.Alerts.label}
           </p>
-          <p className="text-2xl font-bold text-[var(--color-custom1)]">
+          <p className="text-2xl font-bold text-[var(--color-custom3)]">
             {totals.Alerts}
           </p>
         </div>

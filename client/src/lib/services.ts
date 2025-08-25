@@ -23,11 +23,11 @@ export const ServicesOffered:ServicesData[] = [
   },
   {
     id: '5',
-    value:' Hardware and Systems Maintenance and Support'
+    value:'Hardware and Systems Maintenance and Support'
   },
   {
     id: '6',
-    value:' Network Infrastructure Services'
+    value:'Network Infrastructure Services'
   }
   
   

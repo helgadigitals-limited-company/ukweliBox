@@ -44,6 +44,8 @@ export default function DataTable<TData, TValue>({
    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
+     const [globalFilter, setGlobalFilter] = React.useState("")
+
      const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
 
@@ -61,20 +63,21 @@ export default function DataTable<TData, TValue>({
       sorting,
       columnFilters,
       columnVisibility,
+      globalFilter,
     },
+    onGlobalFilterChange: setGlobalFilter, 
+    globalFilterFn: "includesString", 
   })
    
   return(
     <div>
        <div className="flex items-center py-4">
         <Input
-          placeholder="Filter phone numbers..."
-          value={(table.getColumn("phone")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("phone")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+            placeholder="Search by name or date or time or phone or email or service or status"
+            value={globalFilter ?? ""}
+            onChange={(event) => setGlobalFilter(event.target.value)}
+            className="w-115"
+          />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
