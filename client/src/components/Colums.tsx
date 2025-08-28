@@ -1,6 +1,8 @@
 import type { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import { Button } from "./ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { ChevronDown, ChevronUp } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -16,10 +18,50 @@ export type Table = {
   phone: string
   email: string
   description: string
-  status: "Pending" | "Resolved" | "Closed"
+  status: "Pending" | "Resolved" | "Closed" | "Received"
 }
 
 export const columns: ColumnDef<Table>[] = [
+  {
+  id: "expander",
+  header: () => null,
+  cell: ({ row }) => {
+    const isExpanded = row.getIsExpanded()
+    return (
+      <button
+        onClick={row.getToggleExpandedHandler()}
+        className="flex items-center justify-center"
+      >
+        {isExpanded ? (
+          <ChevronUp className="h-4 w-4" />
+        ) : (
+          <ChevronDown className="h-4 w-4" />
+        )}
+      </button>
+    )
+  },
+},
+
+   {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+  },
   {
     accessorKey: "name",
     header: "Name",
@@ -114,7 +156,7 @@ export const columns: ColumnDef<Table>[] = [
     if (status === "Resolved") bgColor = "bg-green-200 text-green-800"
     if (status === "Pending") bgColor = "bg-yellow-200 text-yellow-800"
     if (status === "Closed") bgColor = "bg-red-200 text-red-800"
-
+    if (status === "Received") bgColor ="bg-green-400 text-green-800"
     return (
       <span className={`px-3 py-2 rounded text-1xl ${bgColor}`}>
         {status}

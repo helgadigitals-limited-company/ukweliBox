@@ -21,7 +21,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> =({ children })
   const [adminName, setAdminName] = useState<string | null>(null)
 
   const login = (email: string, password: string) => {
-    if(email === "Lemasani@helgadigitals.co.tz" && password === "98012345"){
+    if(email === "Abdulatif@helgadigitals.co.tz" && password === "98012345"){
       setIsAdmin(true)
       setAdminName(email.split("@")[0])
       return true

@@ -11,7 +11,9 @@ export default function AdminLayout() {
       <AdminSidebar />
       <main>
         <SidebarTrigger />
-        <Outlet/>
+        <div className="container p-4">
+          <Outlet/>
+        </div>
       </main>
     </SidebarProvider>
     </>
