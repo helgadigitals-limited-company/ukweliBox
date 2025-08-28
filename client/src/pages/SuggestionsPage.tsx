@@ -9,7 +9,7 @@ export default function SuggestionsPage(){
     return (
       <>
         <h1 className="flex justify-center text-2xl font-bold">Suggestions List</h1>
-      <DataTable columns={columns} data={suggestionData} />
+         <DataTable columns={columns} data={suggestionData} />
       
     </>
     )
