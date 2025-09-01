@@ -1,23 +1,15 @@
+import * as React from "react"
 import {
   type ColumnDef,
-  type SortingState,
-  type ColumnFiltersState,
-  type VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getSortedRowModel,
   getPaginationRowModel,
   getExpandedRowModel,
-  getSortedRowModel,
   useReactTable,
+  type Row,
 } from "@tanstack/react-table"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
 import {
   Table,
   TableBody,
@@ -26,88 +18,84 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import * as React from "react"
+import { Button } from "@/components/ui/button"
 import { Info } from "lucide-react"
 
-interface DataTableProps<TData extends { description?: string }, TValue>{
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+// ✅ Define interface for data with optional description
+interface DataWithDescription {
+  description?: string
 }
 
-export default function DataTable<
-  TData extends { description?: string },
-  TValue
->({ columns, data }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+type DataTableProps<TData extends DataWithDescription> = {
+  columns: ColumnDef<TData, unknown>[]
+  data: TData[]
+
+  // ✅ Feature toggles
+  enableSearch?: boolean
+  enableColumnFilter?: boolean
+  enableRowSelection?: boolean
+  enableExpansion?: boolean
+  enablePagination?: boolean
+  // ✅ New: Row-specific expansion condition
+  canExpandRow?: (row: TData) => boolean
+}
+
+export default function DataTable<TData extends DataWithDescription>({
+  columns,
+  data,
+  enableSearch = false,
+  enableRowSelection = false,
+  enableExpansion = false,
+  enablePagination = false,
+  canExpandRow, // ✅ New prop
+}: DataTableProps<TData>) {
   const [globalFilter, setGlobalFilter] = React.useState("")
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
   const [expanded, setExpanded] = React.useState({})
 
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    onExpandedChange: setExpanded,
-    getExpandedRowModel: getExpandedRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    getRowCanExpand: () => true,          // allow manual expansion for every row
     state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
       globalFilter,
       rowSelection,
       expanded,
     },
-    enableRowSelection: true,
+    onRowSelectionChange: enableRowSelection ? setRowSelection : undefined,
     onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: "includesString",
+    onExpandedChange: enableExpansion ? setExpanded : undefined,
+    // ✅ Updated: Use row-specific expansion logic if provided
+    getRowCanExpand: enableExpansion 
+      ? (row) => {
+          if (canExpandRow) {
+            return canExpandRow(row.original)
+          }
+          return true // Default: all rows can expand
+        }
+      : () => false,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getExpandedRowModel: enableExpansion ? getExpandedRowModel() : undefined,
+    getPaginationRowModel: enablePagination ? getPaginationRowModel() : undefined,
   })
 
   return (
-    <div className="w-full">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Search by name or date or time or phone or email or service or status"
-          value={globalFilter ?? ""}
-          onChange={(event) => setGlobalFilter(event.target.value)}
-          className="w-115"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns Filter
-            </Button>
-          </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((column) => column.getCanHide())
-                .map((column) => (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                ))}
-            </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+    <div>
+      {/* ✅ Search bar if enabled */}
+      {enableSearch && (
+        <div className="flex items-center py-2">
+          <Input
+            placeholder="Search by name or phone or email or service or status"
+            value={globalFilter ?? ""}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            className="max-w-sm"
+          />
+        </div>
+      )}
 
-      <div className="overflow-hidden rounded-md border">
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -126,19 +114,24 @@ export default function DataTable<
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row) => (
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row: Row<TData>) => (
                 <React.Fragment key={row.id}>
                   <TableRow
                     data-state={row.getIsSelected() && "selected"}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
                       </TableCell>
                     ))}
                   </TableRow>
-                  {row.getIsExpanded() && (
+
+                  {/* ✅ Expansion content with info icon and description - now properly typed */}
+                  {enableExpansion && row.getIsExpanded() && row.original.description && (
                     <TableRow className="bg-muted/20">
                       <TableCell
                         colSpan={row.getVisibleCells().length}
@@ -147,7 +140,7 @@ export default function DataTable<
                         <div className="flex items-start p-4 gap-2 max-w-full">
                           <Info className="h-4 w-4 text-muted-foreground mt-1 shrink-0" />
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm leading-relaxed text-muted-foreground break-words whitespace-pre-wrap overflow-wrap- anywhere max-w-none">
+                            <p className="text-sm leading-relaxed text-muted-foreground break-words whitespace-pre-wrap overflow-wrap-anywhere max-w-none">
                               {row.original.description}
                             </p>
                           </div>
@@ -168,29 +161,27 @@ export default function DataTable<
         </Table>
       </div>
 
-      <div className="text-muted-foreground flex-2 text-sm mt-2">
-        {table.getFilteredSelectedRowModel().rows.length} of{" "}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
-      </div>
-
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+      {/* ✅ Pagination controls if enabled */}
+      {enablePagination && (
+        <div className="flex items-center justify-end space-x-2 py-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

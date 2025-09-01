@@ -3,7 +3,7 @@ import AdminLogin from "./pages/AdminLoginPage"
 import NotFoundPage from "./pages/NotFoundPage"
 import ProtectedRoute from "./components/ProtectedRoute"
 import AdminPage from "./pages/AdminPage"
-import SuggestionsPage from "./pages/SuggestionsPage"
+// import MenuPage from "./pages/MenuPage"
 import AlertsPage from "./pages/AlertsPage"
 import ComplaintsPage from "./pages/ComplaintsPage"
 import ComplimentsPage from "./pages/ComplimentsPage"
@@ -13,6 +13,7 @@ import { ClientLayout } from "./Layouts/ClientLayout"
 import { AuthProvider } from "./components/AuthContext"
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Toaster } from "sonner"
+import SuggestionPage from "./pages/SuggestionsPage"
 
 export default function App() {
   
@@ -56,7 +57,7 @@ export default function App() {
           },
           {
             path: 'suggestions',
-            element: <SuggestionsPage/>
+            element: <SuggestionPage/>
           },
           {
             path: 'alerts',

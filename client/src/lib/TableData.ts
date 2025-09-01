@@ -1,3 +1,8 @@
+import Image1 from "../assets/Upendo.jpeg"
+import Image2 from "../assets/Faidha.jpeg"
+import Image3 from "../assets/Brockline.jpeg"
+import Image4 from "../assets/Harith.jpeg"
+import Image5 from "../assets/Patric.jpeg"
 
 export type Table = {
   id: string
@@ -7,6 +12,7 @@ export type Table = {
   phone: string
   email: string
   service: string
+  img?: string
   category: "suggestion" | "alert" | "complaint"  | "compliment"
   description: string
   status: "Pending" | "Resolved" | "Closed" | "Received"
@@ -22,6 +28,7 @@ export const TableDatas: Table[] = [
     email: "johndoes@email.com",
     service: "Software Development",
     category: "suggestion",
+    img:"https://unsplash.com/photos/man-wearing-henley-top-portrait-7YVZYZeITc8",
     description: "I appreciate the software development service I received, but I believe there is room to improve customer care. While the technical work was delivered well, communication and responsiveness could be more consistent. Providing faster updates, clearer timelines, and proactive support when challenges arise would help build more trust and confidence. Strengthening customer care in this way will make the overall service experience more professional and customer-friendly.",
     status: "Pending"
   },
@@ -34,6 +41,7 @@ export const TableDatas: Table[] = [
     email: "janesmith@email.com",
     service: "ICT Research and Consulting",
     category: "alert",
+    img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description: "This is a sample description for Jane Smith's feedback entry.",
     status: "Resolved"
   },
@@ -46,6 +54,7 @@ export const TableDatas: Table[] = [
     email: "alice@123.email.com",
     service: "Software Development",
     category: "complaint",
+    img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description: "I appreciate the software development service I received, but I believe there is room to improve customer care. While the technical work was delivered well, communication and responsiveness could be more consistent. Providing faster updates, clearer timelines, and proactive support when challenges arise would help build more trust and confidence. Strengthening customer care in this way will make the overall service experience more professional and customer-friendly.",
     status: "Closed"
   },
@@ -57,6 +66,7 @@ export const TableDatas: Table[] = [
     phone: "255780456678",
     email: "jumash@email.com",
     service: "Network Infrastructure Services",
+    img:"https://unsplash.com/photos/man-wearing-henley-top-portrait-7YVZYZeITc8",
     category:"compliment",
     description: "This is a sample description for Juma Shaaban's feedback entry.",
     status: "Received"
@@ -68,6 +78,7 @@ export const TableDatas: Table[] = [
     time: "08:20",
     phone: "255780986678",
     email: "saids@email.com",
+    img:"https://unsplash.com/photos/man-wearing-henley-top-portrait-7YVZYZeITc8",
     service: "Network Infrastructure Services",
     category: "suggestion",
     description: "This is a sample description for Said said feedback entry.",
@@ -80,6 +91,7 @@ export const TableDatas: Table[] = [
     time: "08:20",
     phone: "255757346678",
     email: "saids@email.com",
+    img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     service: "ICT Governance, Risk and Compliance",
     category: "alert",
     description: "This is a sample description for Said said feedback entry.",
@@ -93,6 +105,7 @@ export const TableDatas: Table[] = [
     phone: "255617479762",
     email: "ndassa.up@gmail.com",
     service: "Software Development",
+    img: Image1,
     category: "suggestion",
     description: "Sijapenda lakini haya. Swala la msosi ni jambo la muhimu mimi kama mteja naomba nikija tena msosi uwepo wa kutosha",
     status: "Resolved"
@@ -104,6 +117,7 @@ export const TableDatas: Table[] = [
     time: "09:20",
     phone: "255689744404",
     email: "faydherbatuli@gmail.com",
+    img: Image2,
     service: "Professional ICT Training Services",
     category: "suggestion",
     description: "Nimepata good treatment, tumefundishwa vizuri sana na nimejifunza mengi sana",
@@ -128,6 +142,7 @@ export const TableDatas: Table[] = [
     time: "08:26",
     phone: "255787900234",
     email: "hariths@gmail.com",
+    img: Image4,
     service: "ICT Governance, Risk and Compliance",
     category: "compliment",
     description: "This is a sample description for Harith Issa feedback entry.",
@@ -141,6 +156,7 @@ export const TableDatas: Table[] = [
     phone: "255787346567",
     email: "pjohns@gmail.com",
     service: "Software Development",
+    img: Image5,
     category: "alert",
     description: "This is a sample description for pjohns feedback entry.",
     status: "Resolved"
@@ -153,6 +169,7 @@ export const TableDatas: Table[] = [
     phone: "255757987051",
     email: "bmushi@gmail.com",
     service: "Network Infrastructure Services",
+    img: Image3,
     category: "suggestion",
     description: "This is a sample description for Brockline Mushi feedback entry.",
     status: "Pending"
@@ -188,6 +205,7 @@ export const TableDatas: Table[] = [
     time: "09:30",
     phone: "255711222333",
     email: "jane.smith@email.com",
+    img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     service: "ICT Research and Consulting",
     category: "complaint",
     description: "The consultation was delayed and lacked clarity.",
@@ -201,6 +219,7 @@ export const TableDatas: Table[] = [
     phone: "255722333444",
     email: "alice.johnson@email.com",
     service: "Professional ICT Training Services",
+    img:"https://unsplash.com/photos/smiling-woman-wearing-white-and-black-pinstriped-collared-top-QXevDflbl8A",
     category: "compliment",
     description: "The trainers were excellent and explained concepts clearly.",
     status: "Received",
@@ -225,6 +244,7 @@ export const TableDatas: Table[] = [
     phone: "255744555666",
     email: "emily.davis@email.com",
     service: "Hardware and Systems Maintenance and Support",
+    img:"https://unsplash.com/photos/smiling-woman-wearing-white-and-black-pinstriped-collared-top-QXevDflbl8A",
     category: "suggestion",
     description: "Please provide more detailed maintenance reports.",
     status: "Resolved",
@@ -249,6 +269,7 @@ export const TableDatas: Table[] = [
     phone: "255766777888",
     email: "sarah.taylor@email.com",
     service: "Software Development",
+    img:"https://unsplash.com/photos/smiling-woman-wearing-white-and-black-pinstriped-collared-top-QXevDflbl8A",
     category: "compliment",
     description: "The team delivered an excellent software solution on time.",
     status: "Received",
@@ -273,6 +294,7 @@ export const TableDatas: Table[] = [
     phone: "255788999000",
     email: "olivia.martinez@email.com",
     service: "Professional ICT Training Services",
+    img:"https://unsplash.com/photos/smiling-woman-wearing-white-and-black-pinstriped-collared-top-QXevDflbl8A",
     category: "suggestion",
     description: "Add more practical labs to the training sessions.",
     status: "Resolved",

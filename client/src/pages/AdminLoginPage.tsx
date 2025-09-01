@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { Button } from "@/components/ui/button"
+import { Button } from "@helgadigitals/vera-ui"
 import {Form, FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessage,
 } from "@/components/ui/form"
 import {Card,CardContent,CardFooter,CardHeader,CardTitle,
