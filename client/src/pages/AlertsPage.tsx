@@ -77,14 +77,32 @@ export default function AlertsPage() {
           const initials = row.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
             return (
               <div className="flex items-center gap-2">
-                <span className="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold">
-                {/* {row.name.charAt(0).toUpperCase()}  */}
-                  {initials}
-                  </span>
-                  {row.name}
-              </div>
-            );
-          }
+              {row.img ? (
+                <img 
+                  src={row.img} 
+                  alt={`${row.name} avatar`}
+                  className="w-8 h-8 rounded-full object-cover"
+                  onError={(e) => {
+                    // Fallback to initials if image fails to load
+                    const target = e.currentTarget as HTMLImageElement;
+                    target.style.display = 'none';
+                    const next = target.nextElementSibling as HTMLElement | null;
+                    if (next) {
+                      next.style.display = 'flex';
+                    }
+                  }}
+                />
+              ) : null}
+              <span 
+                className={`w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold ${row.img ? 'hidden' : ''}`}
+              >
+                {initials}
+              </span>
+              {row.name}
+            </div>
+          );
+        }
+          
            if (col === "status") {
             const colors = {
               "Pending": "bg-yellow-100 text-yellow-800",

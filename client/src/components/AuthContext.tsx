@@ -7,7 +7,6 @@ interface AuthContextType {
   logout: () => void;
 }
 
-
 const AuthContext = createContext<AuthContextType>({
     isAdmin:false,
     adminName: null,
@@ -16,10 +15,9 @@ const AuthContext = createContext<AuthContextType>({
 })
 
 export const AuthProvider: React.FC<{children: React.ReactNode}> =({ children }) => {
-
   const [isAdmin, setIsAdmin] = useState(false)
   const [adminName, setAdminName] = useState<string | null>(null)
-
+  
   const login = (email: string, password: string) => {
     if(email === "Abdulatif@helgadigitals.co.tz" && password === "98012345"){
       setIsAdmin(true)
@@ -29,25 +27,25 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> =({ children })
     return false
   }
 
+  const logout = () => {
+    setIsAdmin(false)
+    setAdminName(null)
+    // Navigate to home page after logout
+    window.location.href = "/admin-login"
+  }
 
- const logout = () => {
-   setIsAdmin(false)
-   setAdminName(null)
-  
- }
-
- return (
-
-  <AuthContext.Provider value={{ isAdmin, adminName, login, logout}}>
-     {children}
-  </AuthContext.Provider>
- )
+  return (
+    <AuthContext.Provider value={{ isAdmin, adminName, login, logout}}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
-
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
-   const context = useContext(AuthContext)
-   if(!context) throw new Error ("useAuth must be used within AuthProvider")
-    return context;
+  const context = useContext(AuthContext)
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider')
+  }
+  return context
 }

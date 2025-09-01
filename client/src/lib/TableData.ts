@@ -28,7 +28,7 @@ export const TableDatas: Table[] = [
     email: "johndoes@email.com",
     service: "Software Development",
     category: "suggestion",
-    img:"https://unsplash.com/photos/man-wearing-henley-top-portrait-7YVZYZeITc8",
+    img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
     description: "I appreciate the software development service I received, but I believe there is room to improve customer care. While the technical work was delivered well, communication and responsiveness could be more consistent. Providing faster updates, clearer timelines, and proactive support when challenges arise would help build more trust and confidence. Strengthening customer care in this way will make the overall service experience more professional and customer-friendly.",
     status: "Pending"
   },
@@ -41,7 +41,7 @@ export const TableDatas: Table[] = [
     email: "janesmith@email.com",
     service: "ICT Research and Consulting",
     category: "alert",
-    img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGVyc29ufGVufDB8fDB8fHww",
     description: "This is a sample description for Jane Smith's feedback entry.",
     status: "Resolved"
   },
@@ -54,7 +54,7 @@ export const TableDatas: Table[] = [
     email: "alice@123.email.com",
     service: "Software Development",
     category: "complaint",
-    img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGVyc29ufGVufDB8fDB8fHww",
     description: "I appreciate the software development service I received, but I believe there is room to improve customer care. While the technical work was delivered well, communication and responsiveness could be more consistent. Providing faster updates, clearer timelines, and proactive support when challenges arise would help build more trust and confidence. Strengthening customer care in this way will make the overall service experience more professional and customer-friendly.",
     status: "Closed"
   },
@@ -66,7 +66,7 @@ export const TableDatas: Table[] = [
     phone: "255780456678",
     email: "jumash@email.com",
     service: "Network Infrastructure Services",
-    img:"https://unsplash.com/photos/man-wearing-henley-top-portrait-7YVZYZeITc8",
+    img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
     category:"compliment",
     description: "This is a sample description for Juma Shaaban's feedback entry.",
     status: "Received"
@@ -78,7 +78,7 @@ export const TableDatas: Table[] = [
     time: "08:20",
     phone: "255780986678",
     email: "saids@email.com",
-    img:"https://unsplash.com/photos/man-wearing-henley-top-portrait-7YVZYZeITc8",
+    img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
     service: "Network Infrastructure Services",
     category: "suggestion",
     description: "This is a sample description for Said said feedback entry.",
@@ -91,7 +91,7 @@ export const TableDatas: Table[] = [
     time: "08:20",
     phone: "255757346678",
     email: "saids@email.com",
-    img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGVyc29ufGVufDB8fDB8fHww",
     service: "ICT Governance, Risk and Compliance",
     category: "alert",
     description: "This is a sample description for Said said feedback entry.",
