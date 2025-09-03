@@ -62,12 +62,12 @@ export default function ComplimentsPage() {
               <div>
                 <strong>Service:</strong> {row.service}
               </div>
-               <div>
-                <strong>Feedback Type:</strong> {row.category}
+              <div className="col-span-2">
+                <strong>Description:</strong>
+              <div className="mt-1 p-2 bg-gray-50 rounded border max-h-32 overflow-y-auto break-words whitespace-pre-wrap">
+                {row.description}
               </div>
-              <div>
-                <strong>Description:</strong> {row.description}
-              </div>
+             </div>
             
             </div>
           </div>

@@ -27,9 +27,8 @@ export default function AdminLayout() {
           // displayName:adminName,
           // isFooterVisible:true,
           stylesConfig: {
-            bgColor: "bg-blue-900",
             textColor: "text-white",
-            itemTextSize: "text-md",
+            itemTextSize: "text-xs",
             headingTextSize: "text-[15px]",
           },
           classNames: {

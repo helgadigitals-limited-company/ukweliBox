@@ -1,4 +1,5 @@
-import {DataTable, } from '@helgadigitals/vera-ui'
+// import { Ellipsis } from 'lucide-react';
+import {DataTable} from '@helgadigitals/vera-ui'
 import { TableDatas } from '@/lib/TableData'
 
 export default function ComplaintsPage() {
@@ -7,8 +8,11 @@ export default function ComplaintsPage() {
     console.log("Row clicked:", row);
   };
 
-  
+  // const handleView = (row: (typeof TableDatas)[number]) => {
+  //   console.log("View action clicked:", row);
+  // };
 
+    
   const isLoading = false;
 
   const complaintsData = TableDatas.filter((row) => row.category === "complaint");
@@ -62,16 +66,19 @@ export default function ComplaintsPage() {
               <div>
                 <strong>Service:</strong> {row.service}
               </div>
-               <div>
-                <strong>Feedback Type:</strong> {row.category}
-              </div>
-              <div>
-                <strong>Description:</strong> {row.description}
-              </div>
+               <div className="col-span-2">
+                <strong>Description:</strong>
+                <div className="mt-1 p-2 bg-gray-50 rounded border max-h-32 overflow-y-auto break-words whitespace-pre-wrap">
+                  {row.description}
+                </div>
+             </div>
             
             </div>
           </div>
         )}
+
+        
+
        customBodyRender={(row, col) => {
         if (col === "name") {
           const initials = row.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
@@ -85,7 +92,7 @@ export default function ComplaintsPage() {
                   onError={(e) => {
                     // Fallback to initials if image fails to load
                     const target = e.currentTarget as HTMLImageElement;
-                    target.style.display = 'none';
+                     target.style.display = 'none';
                     const next = target.nextElementSibling as HTMLElement | null;
                     if (next) {
                       next.style.display = 'flex';
