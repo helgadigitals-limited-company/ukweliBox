@@ -59,7 +59,7 @@ export default function AdminHeader() {
           </DropdownMenuTrigger>
           
           <DropdownMenuContent align="end" className="w-56">
-            <div className="px-2 py-1.5 border-b">
+            <div className="px-2 py-1.5">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4 text-gray-500" />
                 <div className="flex flex-col">

@@ -1,12 +1,19 @@
 import {Button, DataTable, } from '@helgadigitals/vera-ui'
 import { TableDatas } from '@/lib/TableData'
 import { useState,useMemo } from 'react';
-import { statusColors } from '@/lib/StatusColors'
-
-
+import { statusColors, statusLabels, type StatusType, selectStatus } from '@/lib/StatusColors'
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { toast } from "sonner"
 
 export default function SuggestionsPage() {
    const [selectedRowIds, setSelectedRowIds] = useState<Array<string | number>>([]);
+   const [isStatusDropdownOpen, setIsStatusDropdownOpen] = useState(false);
 
    const handleRowClick = (row: (typeof TableDatas)[number]) => {
     console.log("Row clicked:", row);
@@ -15,12 +22,13 @@ export default function SuggestionsPage() {
    const selectedRowsData = useMemo(() => {
     console.log("selectedRowIds:", selectedRowIds); // Debug log
     console.log("tableData length:", TableDatas.length); // Debug log
-    const filtered = TableDatas.filter(employee => 
-      selectedRowIds.includes(employee.id)
+    const filtered = TableDatas.filter(customer => 
+      selectedRowIds.includes(customer.id)
     );
     console.log("selectedRowsData:", filtered); // Debug log
     return filtered;
   }, [selectedRowIds]);
+  
   const handleSelectionChange = (ids: Array<string | number>) => {
     console.log("Selection changed to:", ids); // Debug log
     setSelectedRowIds(ids);
@@ -32,7 +40,40 @@ export default function SuggestionsPage() {
     setSelectedRowIds([]);
   };
 
+  // Handle status change
+  const handleStatusChange = (newStatus: "Pending" | "Resolved" | "Closed" | "Received") => {
+    if (selectedRowIds.length === 0) {
+      toast.error("No items selected");
+      return;
+    }
+
+    // Update the status in TableDatas
+    selectedRowIds.forEach(selectedId => {
+      const itemIndex = TableDatas.findIndex(item => item.id === selectedId);
+      if (itemIndex !== -1) {
+        TableDatas[itemIndex].status = newStatus;
+      }
+    });
+
+    // Show success message
+     toast.success(
+      <span>
+        Status updated to{" "}
+        <span className={`px-2 py-1 rounded text-sm ${statusColors[newStatus as StatusType]}`}>
+          {statusLabels[newStatus as StatusType]}
+        </span>{" "}
+        for {selectedRowIds.map(id => TableDatas.find(item => item.id === id)?.name).join(", ")}
+      </span>
+    );
+
+
+    // Clear selection
+    setSelectedRowIds([]);
+    setIsStatusDropdownOpen(false);
+  };
+
   const suggestionsData = TableDatas.filter((row) => row.category === "suggestion");
+  
   return (
     <div>
       <h2 className="text-lg font-bold mb-4">Suggestions List</h2>
@@ -48,39 +89,76 @@ export default function SuggestionsPage() {
           {/* Selected employees list */}
           <div className="mb-4 max-h-32 overflow-y-auto">
             <ul className="space-y-1">
-              {selectedRowsData.map(customer => (         
-                  <li key={customer.id} className="text-sm text-black-700 flex items-center justify-between bg-white px-2 py-1 rounded">
-                    <span className="flex items-center justify-between gap-5">
-                      <strong>{customer.name}</strong> -
-                        <div>
-                        {`Date Submitted: ${customer.date}`}
-                        </div>
-                        <div>
-                        {`Time Of Submission: ${customer.time}`}
-                        </div>
-                      <div className={`flex justify-end ml-90 px-2 py-1 rounded `}>
-                        Status:{customer.status}
-                      </div>
-                    </span>
-                    <Button
-                      onClick={() => setSelectedRowIds([])}
-                      className="text-red-500 hover:bg-blue-700 text-xs ml-2"
-                      variant={'outline'}
-                      size={'icon'}
-                    >
-                      x
-                    </Button>
-                  </li>
-              ))}
+          {selectedRowsData.map(customer => (       
+              <li
+                key={customer.id}
+                className="text-sm text-black-700 flex items-center justify-between bg-white px-2 py-1 rounded"
+              >
+                {/* Left side: name, date, time */}
+                <div className="flex items-center gap-5 font-bold">
+                  <strong>{customer.name} ({customer.category}) - </strong>
+                  <div>{`Date Submitted: ${customer.date}`}</div>
+                  <div>{`Time Of Submission: ${customer.time}`}</div>
+                </div>
+
+              
+                <div className="flex items-center gap-6 font-bold">
+                  <div className={`px-2 py-1 rounded ${statusColors[customer.status as keyof typeof statusColors]}`}
+                  >
+                    Status: {customer.status}
+                  </div>
+                  <Button
+                    onClick={() =>
+                      setSelectedRowIds(prev => prev.filter(id => id !== customer.id))
+                    }
+                    className="relative z-10 text-red-500 hover:bg-blue-50 text-md border border-red-500"
+                    title="Remove from selection"
+                    variant="outline"
+                    size="icon"
+                  >
+                    x
+                  </Button>
+                </div>
+              </li>
+            ))}
+
             </ul>
           </div>
+
+          <div className="flex flex-wrap gap-2 items-center">
           <Button
-              className="px-3 py-1 text-xs bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
+              className="px-3 py-1 text-xs bg-blue-600 text-white rounded hover:bg-blue-950 transition-colors"
               onClick={handleClearSelection}
             >
-              Clear Selection
+              Clear Selection({selectedRowIds.length})
             </Button>
             
+            {/* Change Status Dropdown */}
+            <div className="relative">
+              <Select onValueChange={handleStatusChange} open={isStatusDropdownOpen} onOpenChange={setIsStatusDropdownOpen}>
+                <SelectTrigger className="px-3 py-1 text-xs text-white rounded hover:bg-black border-black h-auto">
+                  <SelectValue 
+                  placeholder="Change Status"
+                  className="text-black data-[placeholder]:text-white" 
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <div className="px-2 py-1 text-xs font-semibold text-black border-0">
+                    Change Feedback Status
+                  </div>
+                  {selectStatus.map((status) => (
+                  <SelectItem value={status.name} className="text-xs">
+                    <span className="flex items-center gap-2">
+                      <span className={`w-2 h-2 rounded-full ${status.color}`}></span>
+                      {status.name}
+                    </span>
+                  </SelectItem>
+                 ))}
+                </SelectContent>
+              </Select>
+            </div>
+            
+          </div>
         </div>
       )}
      <DataTable
@@ -178,9 +256,9 @@ export default function SuggestionsPage() {
         }
           
            if (col === "status") {
-            const statusKey = row.status as keyof typeof statusColors;
+            // const statusKey = row.status as keyof typeof statusColors;
             return (
-              <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[statusKey]}`}>
+              <span className={`px-2 py-1 rounded-full text-xs font-medium ${statusColors[row.status as keyof typeof statusColors]}`}>
                 {row.status}
               </span>
             );

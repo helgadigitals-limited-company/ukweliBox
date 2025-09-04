@@ -1,55 +1,52 @@
-import { MoreVertical } from "lucide-react"
+"use client"
+
+import * as React from "react"
+import {type DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
+
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-interface DropDownProps {
-  currentStatus: string
-  onStatusChange: (newStatus: string) => void
-}
+type Checked = DropdownMenuCheckboxItemProps["checked"]
 
-export function DropDown({ currentStatus, onStatusChange }: DropDownProps) {
-  const statusOptions = ["Pending", "Resolved", "Closed", "Received"]
+export function Dropdown() {
+  const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
+  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
+  const [showPanel, setShowPanel] = React.useState<Checked>(false)
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        // Stop row click / expansion
-        
-        className="p-1 hover:bg-gray-100 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-        aria-label="Change status"
-        title="Change status"
-      >
-        <MoreVertical className="w-4 h-4 text-gray-500" />
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Open</Button>
       </DropdownMenuTrigger>
-
-      <DropdownMenuContent
-        align="end"
-        sideOffset={4}
-        className="w-36 z-50"
-        // Prevent focus from jumping back to row which can cause immediate close
-        onCloseAutoFocus={(e) => e.preventDefault()}
-      >
-        {statusOptions.map((status) => (
-          <DropdownMenuItem
-            key={status}
-            // Radix-specific; prevents row click + allows selecting
-            onSelect={(e) => {
-              e.preventDefault()
-              onStatusChange(status)
-            }}
-            className={`cursor-pointer ${
-              currentStatus === status ? "bg-blue-50 text-blue-700" : ""
-            }`}
-          >
-            {status}
-          </DropdownMenuItem>
-        ))}
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Change Feedback Status</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuCheckboxItem
+          checked={showStatusBar}
+          onCheckedChange={setShowStatusBar}
+        >
+          Resolved
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={showActivityBar}
+          onCheckedChange={setShowActivityBar}
+        >
+          Pending
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={showPanel}
+          onCheckedChange={setShowPanel}
+        >
+          Closed
+        </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
 }
-
