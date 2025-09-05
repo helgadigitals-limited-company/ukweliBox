@@ -73,7 +73,7 @@ export const TableDatas: Table[] = [
   },
   {
     id: "5",
-    name: "said Said",
+    name: "Said Said",
     date: "2025-10-03",
     time: "08:20",
     phone: "255780986678",

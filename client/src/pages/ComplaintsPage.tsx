@@ -162,7 +162,7 @@ export default function ComplaintsPage() {
         </div>
       )}
      <DataTable
-        className="[&_tr]:border-0 [&_tbody_tr]:border-b-0 [&_tbody_tr:hover]:bg-blue-50 [&_tbody_tr:hover]:transition-colors [&_tbody_tr:hover]:duration-150 [&_thead_th]:font-bold [&_th]:font-bold [&_thead_th]:capitalize [&_th]:capitalize [&_thead_th]:bg-gray-100 [&_th]:bg-gray-100"
+        className="[&_tr]:border-0 [&_tbody_tr]:border-b-0 [&_thead_tr]:border-0 [&_thead]:border-0 [&_tbody_tr:hover]:bg-blue-50 [&_tbody_tr:hover]:transition-colors [&_tbody_tr:hover]:duration-150 [&_thead_th]:font-bold [&_th]:font-bold [&_thead_th]:capitalize [&_th]:capitalize [&_thead_th]:bg-gray-200 [&_th]:bg-gray-200"
         tableData={complaintsData}
         tableColumns={["name","email","phone","date","time","service","status"]}
         excludeColumns={["id"]}
