@@ -27,7 +27,8 @@ export default function SuggestionsPage() {
     );
     console.log("selectedRowsData:", filtered); // Debug log
     return filtered;
-  }, [selectedRowIds]);
+  }, [selectedRowIds]
+);
   
   const handleSelectionChange = (ids: Array<string | number>) => {
     console.log("Selection changed to:", ids); // Debug log
