@@ -1,10 +1,10 @@
 import {  PartyPopper , TriangleAlert, BellRing, MessageSquareQuote, LayoutDashboard, Settings } from "lucide-react"
-import {SidebarLayout} from "@helgadigitals/vera-ui"
+import {SidebarLayout,ThemeProvider, ThemeToggle} from "@helgadigitals/vera-ui"
 import { Outlet } from "react-router-dom"
 import  Image  from "../assets/Helga.jpg"
 import AdminHeader from "@/components/AdminHeader"
-import { ThemeProvider } from "@/components/ThemeProvider"
-import {ModeToggle}  from "@/components/ModeToggle"
+// import { ThemeProvider } from "@/components/ThemeProvider"
+// import {ModeToggle}  from "@/components/ModeToggle"
 
 export default function AdminLayout() {
 
@@ -12,7 +12,7 @@ export default function AdminLayout() {
 
   return (
     <>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+     <ThemeProvider defaultTheme="dark" storageKey="ukweliBox-theme">
     <SidebarLayout props={{
       
        items: [
@@ -40,10 +40,10 @@ export default function AdminLayout() {
           },
       }}
     >
-      <div className="absolute inset-y-0 right-8 top-0 z-10 mt-4">
-          <ModeToggle />
+      <div className="absolute inset-y-0 right-2 top-0 z-10 mt-4">
+          <ThemeToggle />
         </div>
-      <div className="absolute inset-y-0 right-15 top-0 z-10">
+      <div className="absolute inset-y-0 right-20 top-0 z-10">
         <AdminHeader />
       </div>
      <Outlet/>

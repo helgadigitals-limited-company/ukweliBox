@@ -188,11 +188,11 @@ export const TableDatas: Table[] = [
   },
   {
     id: "14",
-    name: "John Doe",
+    name: "Joshua Mkunda",
     date: "2025-10-01",
     time: "08:15",
     phone: "255700111222",
-    email: "john.doe@email.com",
+    email: "joshuashauri@email.com",
     service: "Software Development",
     category: "suggestion",
     description: "Great service overall but customer support could improve.",

@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { toast } from "sonner"
+import { Plus, Minus } from "lucide-react"
 
 export default function SuggestionsPage() {
    const [selectedRowIds, setSelectedRowIds] = useState<Array<string | number>>([]);
@@ -144,7 +145,7 @@ export default function SuggestionsPage() {
                   />
                 </SelectTrigger>
                 <SelectContent>
-                  <div className="px-2 py-1 text-xs font-semibold text-black border-0">
+                  <div className="px-2 py-1 text-xs font-semibold text-black dark:text-gray-500 border-0">
                     Change Feedback Status
                   </div>
                   {selectStatus.map((status) => (
@@ -187,31 +188,7 @@ export default function SuggestionsPage() {
         loading={isLoading}
         loadingComponent={<div>Fetching records...</div>}
 
-          // dataTableClassName = `[&_tr]:border-0
-          //   [&_tbody_tr]:border-b-0
-          //   [&_tbody_tr]:h-14
-          //   [&_tbody_tr]:cursor-pointer
-          //   [&_td]:py-4 [&_td]:px-4
-          //   [&_th]:py-3 [&_th]:px-4
-          //   [&_thead_th]:font-bold [&_th]:font-bold
-          //   [&_thead_th]:capitalize [&_th]:capitalize
-          //   [&_thead_th]:bg-muted [&_thead_th]:text-muted-foreground
-          //   transition-colors
-
-          //   /* Hover state (theme-aware) */
-          //   [&_tbody_tr:hover]:bg-accent/60
-          //   [&_tbody_tr:hover]:text-foreground
-
-          //   /* Selected state -> match hover bg */
-          //   [&_tbody_tr[data-state=selected]]:bg-accent/60
-          //   [&_tbody_tr[data-state=selected]]:text-foreground
-          //   [&_tbody_tr[aria-selected='true']]:bg-accent/60
-          //   [&_tbody_tr[aria-selected='true']]:text-foreground
-
-          //   /* Keyboard focus */
-          //   [&_tbody_tr:focus-visible]:outline-none
-          //   [&_tbody_tr:focus-visible]:ring-2
-          //   [&_tbody_tr:focus-visible]:ring-ring`
+          
 
         emptyStateComponent={<div>No users found. Add some users first.</div>}
         emptyMessage="Try adjusting your search criteria"
@@ -225,8 +202,12 @@ export default function SuggestionsPage() {
          // Row Expansion
         expandable={true}
         expandOnRowClick={false}
-        expandIcon="+"
-        collapseIcon="−"
+        expandIcon={
+          <Plus className="w-3 h-3 hover:bg-white hover:text-black transition-colors" strokeWidth={4}/>
+        }
+        collapseIcon={
+          <Minus className="w-3 h-3 hover:bg-white hover:text-black transition-colors" strokeWidth={4} />
+        }
         expandedContent={(row) => (
           <div className="p-4 bg-white dark:bg-gray-800 rounded border dark:border-gray-600">
             <h4 className="font-semibold mb-2 dark:text-white">Customer Details</h4>

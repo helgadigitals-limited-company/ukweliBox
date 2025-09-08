@@ -23,7 +23,6 @@ export default function AdminHeader() {
   const { adminName, logout } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
 
-  // Extract initials from admin email/name
   const getInitials = (name: string | null) => {
     if (!name) return "A"
     const names = name.split(/[\s@.]/)
@@ -37,47 +36,56 @@ export default function AdminHeader() {
   const displayEmail = adminName ? `${adminName}@helgadigitals.co.tz` : ""
 
   return (
-    <header className="flex items-center justify-end p-2">
+    <header className="flex items-center justify-end p-2 bg-transparent text-gray-900 dark:text-white">
       <div className="flex items-center gap-3">
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
           <DropdownMenuTrigger asChild>
-            <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors">
-              {/* Avatar */}
+            <button
+              className="group flex items-center gap-2 rounded-lg p-2 transition-colors bg-transparent
+               text-gray-900 dark:text-white
+               hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
+              aria-label="Admin menu"
+            >
               <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
                 {initials}
               </div>
-              
-              {/* Admin info */}
               <div className="flex flex-col items-start">
-                <span className="text-sm font-medium">{adminName}</span>
-                <span className="text-xs">{displayEmail}</span>
+                <span className="text-sm font-medium leading-none text-gray-900 dark:text-gray-400">
+                  {adminName}
+                </span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  {displayEmail}
+                </span>
               </div>
-              
-              {/* Dropdown arrow */}
-              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`w-4 h-4 text-gray-400 dark:text-gray-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
+              />
             </button>
           </DropdownMenuTrigger>
-          
+
           <DropdownMenuContent align="end" className="w-56">
             <div className="px-2 py-1.5">
               <div className="flex items-center gap-2">
-                <User className="w-4 h-4 text-gray-500" />
+                <User className="w-4 h-4 text-gray-500 dark:text-gray-500" />
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium">{adminName}</span>
-                  <span className="text-xs text-gray-500">{displayEmail}</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-gray-500">
+                    {adminName}
+                  </span>
+                  <span className="text-xs text-gray-500 dark:text-gray-500">
+                    {displayEmail}
+                  </span>
                 </div>
               </div>
             </div>
-            
+
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <button className="flex items-center gap-2 w-full hover:text-blue-700">
+                  <button className="flex items-center gap-2 w-full text-gray-700 dark:text-gray-500 hover:text-blue-700 dark:hover:text-blue-400">
                     <LogOut className="w-4 h-4" />
                     Logout
                   </button>
                 </AlertDialogTrigger>
-                
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Are you sure you want to logout?</AlertDialogTitle>
@@ -87,7 +95,7 @@ export default function AdminHeader() {
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction 
+                    <AlertDialogAction
                       onClick={logout}
                       className="bg-blue-600 hover:bg-blue-700"
                     >

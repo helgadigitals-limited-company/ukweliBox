@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { toast } from "sonner"
+import { Minus, Plus } from 'lucide-react';
 
 export default function ComplaintsPage() {
    const [selectedRowIds, setSelectedRowIds] = useState<Array<string | number>>([]);
@@ -143,7 +144,7 @@ export default function ComplaintsPage() {
                   />
                 </SelectTrigger>
                 <SelectContent>
-                  <div className="px-2 py-1 text-xs font-semibold text-black border-0">
+                  <div className="px-2 py-1 text-xs font-semibold text-black  dark:text-gray-500 border-0">
                     Change Feedback Status
                   </div>
                   {selectStatus.map((status) => (
@@ -198,8 +199,12 @@ export default function ComplaintsPage() {
          // Row Expansion
         expandable={true}
         expandOnRowClick={false}
-        expandIcon="+"
-        collapseIcon="−"
+         expandIcon={
+          <Plus className="w-3 h-3 hover:bg-white hover:text-black transition-colors" strokeWidth={4}/>
+        }
+        collapseIcon={
+          <Minus className="w-3 h-3 hover:bg-white hover:text-black transition-colors" strokeWidth={4} />
+        }
         expandedContent={(row) => (
           <div className="p-4 bg-white dark:bg-gray-800 rounded border dark:border-gray-600">
             <h4 className="font-semibold mb-2 dark:text-white">Customer Details</h4>
