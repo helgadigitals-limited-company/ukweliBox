@@ -4,7 +4,7 @@ import { z } from "zod"
 import { Button } from "@helgadigitals/vera-ui"
 import {Form, FormControl,FormDescription,FormField,FormItem,FormLabel,FormMessage,
 } from "@/components/ui/form"
-import {Card,CardContent,CardFooter,CardHeader,CardTitle,
+import {Card,CardContent,CardHeader,CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { useNavigate } from "react-router-dom"
@@ -107,9 +107,9 @@ export default function Admin(){
     </Form>
 
     </CardContent>
-        <CardFooter className="justify-center text-sm text-gray-500">
+        {/* <CardFooter className="justify-center text-sm text-gray-500">
           Copyright © 2025 Helga Digital Solutions Limited
-        </CardFooter>
+        </CardFooter> */}
   </Card>
   </div>
   )

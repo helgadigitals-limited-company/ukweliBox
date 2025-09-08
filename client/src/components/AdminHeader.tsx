@@ -49,8 +49,8 @@ export default function AdminHeader() {
               
               {/* Admin info */}
               <div className="flex flex-col items-start">
-                <span className="text-sm font-medium text-gray-900">{adminName}</span>
-                <span className="text-xs text-gray-500">{displayEmail}</span>
+                <span className="text-sm font-medium">{adminName}</span>
+                <span className="text-xs">{displayEmail}</span>
               </div>
               
               {/* Dropdown arrow */}

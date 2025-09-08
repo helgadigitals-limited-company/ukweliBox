@@ -81,8 +81,8 @@ export default function SuggestionsPage() {
       
       {/* Show selected employees details */}
       {selectedRowsData.length > 0 && (
-        <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <h3 className="font-semibold text-blue-800 mb-3">
+        <div className="mb-4 p-4 bg-blue-50 dark:bg-gray-800 rounded-lg border border-blue-200 dark:border-gray-600">
+          <h3 className="font-semibold text-blue-800 dark:text-blue-300 mb-3">
             Selected Customers ({selectedRowsData.length})
           </h3>
           
@@ -93,7 +93,7 @@ export default function SuggestionsPage() {
           {selectedRowsData.map(customer => (       
               <li
                 key={customer.id}
-                className="text-sm text-black-700 flex items-center justify-between bg-white px-2 py-1 rounded"
+                className="text-sm text-black-700 dark:text-gray-200 flex items-center justify-between bg-white dark:bg-gray-700 px-2 py-1 rounded"
               >
                 {/* Left side: name, date, time */}
                 <div className="flex items-center gap-5 font-bold">
@@ -163,7 +163,15 @@ export default function SuggestionsPage() {
         </div>
       )}
      <DataTable
-        className="[&_tr]:border-0 [&_tbody_tr]:border-0 [&_thead_tr]:border-0 [&_thead]:border-0 [&_tbody_tr:hover]:bg-blue-50 [&_tbody_tr:hover]:transition-colors [&_tbody_tr:hover]:duration-150 [&_thead_th]:font-bold [&_th]:font-bold [&_thead_th]:capitalize [&_th]:capitalize [&_thead_th]:bg-gray-200 [&_th]:bg-gray-200"
+       className="[&_tr]:border-0 [&_tbody_tr]:border-0 [&_thead_tr]:border-0 [&_thead]:border-0 
+            [&_thead_th]:font-bold [&_th]:font-bold [&_thead_th]:capitalize [&_th]:capitalize 
+            [&_thead_th]:bg-gray-200 [&_th]:bg-gray-200 
+            dark:[&_thead_th]:bg-gray-800 dark:[&_th]:bg-gray-800 
+            dark:[&_thead_th]:text-white dark:[&_th]:text-white
+            [&_tbody_tr:hover]:bg-blue-50 [&_tbody_tr:hover]:transition-colors [&_tbody_tr:hover]:duration-150 
+            dark:[&_tbody_tr:hover]:bg-gray-600 dark:[&_tbody_tr:hover]:text-white
+            [&_tbody_tr[data-state=selected]]:bg-blue-100 
+            dark:[&_tbody_tr[data-state=selected]]:bg-gray-600 dark:[&_tbody_tr[data-state=selected]]:text-white"
         tableData={suggestionsData}
         tableColumns={["name","email","phone","date","time","service","status"]}
         excludeColumns={["id"]}
@@ -178,6 +186,32 @@ export default function SuggestionsPage() {
 
         loading={isLoading}
         loadingComponent={<div>Fetching records...</div>}
+
+          // dataTableClassName = `[&_tr]:border-0
+          //   [&_tbody_tr]:border-b-0
+          //   [&_tbody_tr]:h-14
+          //   [&_tbody_tr]:cursor-pointer
+          //   [&_td]:py-4 [&_td]:px-4
+          //   [&_th]:py-3 [&_th]:px-4
+          //   [&_thead_th]:font-bold [&_th]:font-bold
+          //   [&_thead_th]:capitalize [&_th]:capitalize
+          //   [&_thead_th]:bg-muted [&_thead_th]:text-muted-foreground
+          //   transition-colors
+
+          //   /* Hover state (theme-aware) */
+          //   [&_tbody_tr:hover]:bg-accent/60
+          //   [&_tbody_tr:hover]:text-foreground
+
+          //   /* Selected state -> match hover bg */
+          //   [&_tbody_tr[data-state=selected]]:bg-accent/60
+          //   [&_tbody_tr[data-state=selected]]:text-foreground
+          //   [&_tbody_tr[aria-selected='true']]:bg-accent/60
+          //   [&_tbody_tr[aria-selected='true']]:text-foreground
+
+          //   /* Keyboard focus */
+          //   [&_tbody_tr:focus-visible]:outline-none
+          //   [&_tbody_tr:focus-visible]:ring-2
+          //   [&_tbody_tr:focus-visible]:ring-ring`
 
         emptyStateComponent={<div>No users found. Add some users first.</div>}
         emptyMessage="Try adjusting your search criteria"
@@ -194,34 +228,33 @@ export default function SuggestionsPage() {
         expandIcon="+"
         collapseIcon="−"
         expandedContent={(row) => (
-          <div className="p-4 bg-white rounded border">
-            <h4 className="font-semibold mb-2">Customer Details</h4>
-            <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="p-4 bg-white dark:bg-gray-800 rounded border dark:border-gray-600">
+            <h4 className="font-semibold mb-2 dark:text-white">Customer Details</h4>
+            <div className="grid grid-cols-2 gap-4 text-sm dark:text-gray-200">
               <div>
-                <strong>Full Name:</strong> {row.name}
+                <strong className="dark:text-white">Full Name:</strong> {row.name}
               </div>
               <div>
-                <strong>Phone:</strong> {row.phone}
+                <strong className="dark:text-white">Phone:</strong> {row.phone}
               </div>
               <div>
-                <strong>Date Submitted:</strong> {row.date}
+                <strong className="dark:text-white">Date Submitted:</strong> {row.date}
               </div>
               <div>
-                <strong>Time:</strong> {row.time}
+                <strong className="dark:text-white">Time:</strong> {row.time}
               </div>
               <div>
-                <strong>Email:</strong> {row.email}
+                <strong className="dark:text-white">Email:</strong> {row.email}
               </div>
               <div>
-                <strong>Service:</strong> {row.service}
+                <strong className="dark:text-white">Service:</strong> {row.service}
               </div>
-               <div className="col-span-2">
-                <strong>Description:</strong>
-                <div className="mt-1 p-2 bg-gray-50 rounded border max-h-32 overflow-y-auto break-words whitespace-pre-wrap">
+              <div className="col-span-2">
+                <strong className="dark:text-white">Description:</strong>
+                <div className="mt-1 p-2 bg-gray-50 dark:bg-gray-700 rounded border dark:border-gray-600 max-h-32 overflow-y-auto break-words whitespace-pre-wrap dark:text-gray-200">
                   {row.description}
                 </div>
-             </div>
-            
+              </div>
             </div>
           </div>
         )}
@@ -269,7 +302,7 @@ export default function SuggestionsPage() {
         }}
         />
          {/* Table Stats */}
-      <div className="mt-4 text-sm text-gray-600 flex gap-6">
+      <div className="mt-4 text-sm text-gray-600 dark:text-gray-300 flex gap-6">
         <span>Total Customers: {TableDatas.length}</span>
         <span>Selected: {selectedRowIds.length}</span>
         <span>Date Submitted:{selectedRowsData.map((date) =>(date.date || 0), 0).toLocaleString()}</span>
