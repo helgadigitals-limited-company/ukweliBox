@@ -1,10 +1,24 @@
-import {  PartyPopper , TriangleAlert, BellRing, MessageSquareQuote, LayoutDashboard, Settings } from "lucide-react"
-import {SidebarLayout,ThemeProvider, ThemeToggle} from "@helgadigitals/vera-ui"
+import {MessageSquareMore,PartyPopper , TriangleAlert, BellRing, MessageSquareQuote, LayoutDashboard, Settings } from "lucide-react"
+import {SidebarLayout,type MixedSidebarItem, ThemeProvider, ThemeToggle} from "@helgadigitals/vera-ui"
 import { Outlet } from "react-router-dom"
 import  Image  from "../assets/Helga.jpg"
 import AdminHeader from "@/components/AdminHeader"
-// import { ThemeProvider } from "@/components/ThemeProvider"
-// import {ModeToggle}  from "@/components/ModeToggle"
+
+const mixedItems: MixedSidebarItem[] = [
+  {title:"DASHBOARD", path:"/admin/dashboard", icon:LayoutDashboard},
+  {
+    key: "feedback",
+    label: "FEEDBACK TYPES", 
+    icon: MessageSquareMore,
+    items: [
+        {title: "SUGGESTIONS",path: "/admin/suggestions",icon: MessageSquareQuote},
+        {title: "ALERTS",path: "/admin/alerts",icon: BellRing},
+        {title: "COMPLAINTS",path: "/admin/complaints",icon: TriangleAlert},
+        {title: "COMPLIMENTS",path: "/admin/compliments",icon: PartyPopper},  
+    ]
+  },
+  {title: "SETTINGS",path: "/admin/settings",icon: Settings},
+];
 
 export default function AdminLayout() {
 
@@ -13,17 +27,8 @@ export default function AdminLayout() {
   return (
     <>
      <ThemeProvider defaultTheme="dark" storageKey="ukweliBox-theme">
-    <SidebarLayout props={{
-      
-       items: [
-        {title:"DASHBOARD", path:"/admin/dashboard", icon:LayoutDashboard},
-        {title: "SUGGESTIONS",path: "/admin/suggestions",icon: MessageSquareQuote},
-        {title: "ALERTS",path: "/admin/alerts",icon: BellRing},
-        {title: "COMPLAINTS",path: "/admin/complaints",icon: TriangleAlert},
-        {title: "COMPLIMENTS",path: "/admin/compliments",icon: PartyPopper},
-        {title: "SETTINGS",path: "/admin/settings",icon: Settings},
-       ],
-       
+     <SidebarLayout props={{
+        items:mixedItems,
         heading:"Innovate, Implement & Transform",
           image:Image,
           // label:"Home",
