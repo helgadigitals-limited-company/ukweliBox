@@ -7,7 +7,7 @@ import { ChartLegend, ChartLegendContent } from "@/components/ui/chart"
 import { ChartData } from "@/lib/ChartDataType"
 
 
- const chartConfig = {
+ const chartConfig: ChartConfig = {
     Suggestions: {
     label: "Suggestions",
     color: "#6463D6",
@@ -24,7 +24,7 @@ import { ChartData } from "@/lib/ChartDataType"
     label: "Compliments",
     color: "#1D1717",
   },
-} satisfies ChartConfig
+}
 
 
 export default function DashboardChart() {
@@ -55,44 +55,43 @@ export default function DashboardChart() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 text-right">
+      <div className="grid grid-cols-2 gap-6 text-right ">
         <div>
-          <p className="text-1xl text-[var(--color-custom3)]">
+          <p className="text-1xl ">
             {chartConfig.Suggestions.label}
           </p>
-          <p className="text-2xl font-bold text-[var(--color-custom3)]">
+          <p className="text-2xl font-bold">
             {totals.Suggestions}
           </p>
         </div>
         <div>
-          <p className="text-1xl text-[var(--color-custom3)]">
+          <p className="text-1xl ">
             {chartConfig.Complaints.label}
           </p>
-          <p className="text-2xl font-bold text-[var(--color-custom3)]">
+          <p className="text-2xl font-bold">
             {totals.Complaints}
           </p>
         </div>
         <div>
           <div>
-          <p className="text-1xl text-[var(--color-custom3)]">
+          <p className="text-1xl">
             {chartConfig.Compliments.label}
           </p>
-          <p className="text-2xl font-bold text-[var(--color-custom3)]">
+          <p className="text-2xl font-bold">
             {totals.Compliments}
           </p>
         </div>
         </div>
         <div>
-          <p className="text-1xl text-[var(--color-custom3)]">
+          <p className="text-1xl ">
             {chartConfig.Alerts.label}
           </p>
-          <p className="text-2xl font-bold text-[var(--color-custom3)]">
+          <p className="text-2xl font-bold">
             {totals.Alerts}
           </p>
         </div>
       </div>
     </div>
-
     <ChartContainer config={chartConfig} className="p-6 text-foreground">
     <BarChart accessibilityLayer data={ChartData} className="w-full">
       <CartesianGrid vertical={false} />
@@ -112,6 +111,5 @@ export default function DashboardChart() {
     </BarChart>
 </ChartContainer>
 </div>
-
-  )
+)
 }

@@ -58,11 +58,16 @@ export default function Admin(){
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-    <Card className="border-0 w-4/5 max-w-[500px]">
-        <CardHeader>
-          <CardTitle className="text-center">Admin Login</CardTitle>
+    <Card className="border border-gray-200 bg-white w-4/5 max-w-[500px] shadow-lg transition-all duration-200 mt-24">
+        <CardHeader className="pb-6">
+          <CardTitle className="text-center text-2xl font-bold">
+            Admin Login
+        </CardTitle>
+        <p className="text-center text-sm mt-2">
+            Access your admin dashboard
+          </p>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
       <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-md mx-auto space-y-6">
 
@@ -71,11 +76,14 @@ export default function Admin(){
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel className="font-medium">
+                Email Address
+              </FormLabel>
               <FormControl>
                 <Input 
-                className="w-full"
-                placeholder="" {...field} />
+                 className="w-full bg-white  focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                placeholder="your.email@helgadigitals.co.tz" 
+                {...field} />
               </FormControl>
               <FormDescription>
               </FormDescription>
@@ -93,8 +101,9 @@ export default function Admin(){
               <FormControl>
                 <Input 
                 type="password"
-                className="w-full"
-                placeholder="" {...field} />
+                 className="w-full bg-white  focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+                placeholder="Enter your password"
+                 {...field} />
               </FormControl>
               <FormDescription>
               </FormDescription>
@@ -102,8 +111,8 @@ export default function Admin(){
             </FormItem>
           )}
         />
-        <div className="flex justify-center">
-        <Button type="submit" className="w-auto px-8">Login</Button>
+        <div className="flex justify-center pt-4">
+        <Button type="submit" className="w-auto px-8 py-2 bg-blue-600">Login</Button>
         </div>
       </form>
     </Form>

@@ -66,12 +66,12 @@ export default function AdminHeader() {
           <DropdownMenuContent align="end" className="w-56">
             <div className="px-2 py-1.5">
               <div className="flex items-center gap-2">
-                <User className="w-4 h-4 text-gray-500 dark:text-gray-500" />
+                <User className="w-4 h-4 " />
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium text-gray-900 dark:text-gray-500">
+                  <span className="text-sm font-medium ">
                     {adminName}
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-500">
+                  <span className="text-xs">
                     {displayEmail}
                   </span>
                 </div>
@@ -81,8 +81,8 @@ export default function AdminHeader() {
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <button className="flex items-center gap-2 w-full text-gray-700 dark:text-gray-500 hover:text-blue-700 dark:hover:text-blue-400">
-                    <LogOut className="w-4 h-4" />
+                  <button className="flex items-center gap-2 w-full hover:text-blue-700 dark:hover:text-blue-400">
+                    <LogOut className="w-6 h-6" />
                     Logout
                   </button>
                 </AlertDialogTrigger>

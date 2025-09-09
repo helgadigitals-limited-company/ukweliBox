@@ -14,7 +14,7 @@ const mixedItems: MixedSidebarItem[] = [
         {title: "SUGGESTIONS",path: "/admin/suggestions",icon: MessageSquareQuote},
         {title: "ALERTS",path: "/admin/alerts",icon: BellRing},
         {title: "COMPLAINTS",path: "/admin/complaints",icon: TriangleAlert},
-        {title: "COMPLIMENTS",path: "/admin/compliments",icon: PartyPopper},  
+        {title: "COMPLIMENTS",path: "/admin/compliments",icon: PartyPopper},
     ]
   },
   {title: "SETTINGS",path: "/admin/settings",icon: Settings},
@@ -36,7 +36,7 @@ export default function AdminLayout() {
           // isFooterVisible:true,
           stylesConfig: {
             textColor: "text-white",
-            itemTextSize: "text-xs",
+            itemTextSize: "text-xs font-bold",
             headingTextSize: "text-[15px]",
           },
           classNames: {
@@ -48,7 +48,7 @@ export default function AdminLayout() {
       <div className="absolute inset-y-0 right-2 top-0 z-10 mt-4">
           <ThemeToggle />
         </div>
-      <div className="absolute inset-y-0 right-20 top-0 z-10">
+      <div className="absolute inset-y-0 right-22 top-0 z-10">
         <AdminHeader />
       </div>
      <Outlet/>
