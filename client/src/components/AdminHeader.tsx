@@ -36,29 +36,27 @@ export default function AdminHeader() {
   const displayEmail = adminName ? `${adminName}@helgadigitals.co.tz` : ""
 
   return (
-    <header className="flex items-center justify-end p-2 bg-transparent text-gray-900 dark:text-white">
+    <header className="flex items-center justify-end p-2 bg-background">
       <div className="flex items-center gap-3">
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
           <DropdownMenuTrigger asChild>
             <button
-              className="group flex items-center gap-2 rounded-lg p-2 transition-colors bg-transparent
-               text-gray-900 dark:text-white
-               hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none"
+              className="group flex items-center gap-2 rounded-lg p-2 transition-colors bg-background"
               aria-label="Admin menu"
             >
               <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
                 {initials}
               </div>
               <div className="flex flex-col items-start">
-                <span className="text-sm font-medium leading-none text-gray-900 dark:text-gray-400">
+                <span className="text-sm font-medium leading-none bg-background">
                   {adminName}
                 </span>
-                <span className="text-xs text-gray-500 dark:text-gray-400">
+                <span className="text-xs">
                   {displayEmail}
                 </span>
               </div>
               <ChevronDown
-                className={`w-4 h-4 text-gray-400 dark:text-gray-400 transition-transform ${isOpen ? "rotate-180" : ""}`}
+                className={`w-4 h-4 bg-background transition-transform ${isOpen ? "rotate-180" : ""}`}
               />
             </button>
           </DropdownMenuTrigger>
@@ -81,8 +79,8 @@ export default function AdminHeader() {
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <button className="flex items-center gap-2 w-full hover:text-blue-700 dark:hover:text-blue-400">
-                    <LogOut className="w-6 h-6" />
+                  <button className="flex items-center gap-2 w-full">
+                    <LogOut className="w-6 h-6 " />
                     Logout
                   </button>
                 </AlertDialogTrigger>
@@ -97,7 +95,6 @@ export default function AdminHeader() {
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction
                       onClick={logout}
-                      className="bg-blue-600 hover:bg-blue-700"
                     >
                       Yes, Logout
                     </AlertDialogAction>

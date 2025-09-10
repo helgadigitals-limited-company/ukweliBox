@@ -45,12 +45,11 @@ export default function AdminLayout() {
           },
       }}
     >
-      <div className="absolute inset-y-0 right-2 top-0 z-10 mt-4">
-          <ThemeToggle />
-        </div>
-      <div className="absolute inset-y-0 right-22 top-0 z-10">
+      <div className="absolute top-0 right-0 z-10 flex items-center gap-1 mt-2 mr-4">
         <AdminHeader />
+        <ThemeToggle />
       </div>
+
      <Outlet/>
     </SidebarLayout>
     </ThemeProvider>
