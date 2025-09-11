@@ -46,7 +46,8 @@ export default function DashboardChart() {
   )
 
   return(
-  <div className="rounded-xl border p-6 text-foreground">
+  <div className=" grid sm:grid-cols-1 rounded-xl border p-6 text-foreground">
+    <div>
     <div className="mb-6 flex items-start justify-between">
       <div>
         <h2 className="text-lg font-semibold">Bar Chart</h2>
@@ -92,6 +93,8 @@ export default function DashboardChart() {
         </div>
       </div>
     </div>
+    </div>
+    <div>
     <ChartContainer config={chartConfig} className="p-6 text-foreground">
     <BarChart accessibilityLayer data={ChartData} className="w-full">
       <CartesianGrid vertical={false} />
@@ -110,6 +113,7 @@ export default function DashboardChart() {
       <Bar dataKey="Compliments" fill="var(--color-Compliments)" radius={4} />
     </BarChart>
 </ChartContainer>
+</div>
 </div>
 )
 }

@@ -296,7 +296,7 @@ export function FeedbackCategory({
         }}
       />
 
-      <div className="mt-4 text-sm text-gray-600 dark:text-gray-300 flex gap-6">
+      <div className="mt-4 text-sm flex gap-6">
         <span>Total Customers: {TableDatas.length}</span>
         <span>Selected: {selectedRowIds.length}</span>
         <span>

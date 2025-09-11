@@ -9,7 +9,7 @@ export default function FeedbackDailyOverview({title="Feedback Daily Overview",i
   return(
      <div>
       <h1 className="text-3xl font-bold text-center mt-2">{title}</h1>
-      <div className="relative flex flex-wrap justify-center gap-6 mt-6 ml-4 mr-10">
+      <div className=" grid sm:grid-cols-4 grid-cols-2 justify-center gap-6 mt-6 ml-4 mr-10">
         {items.map((item, i) => (
           <Card
             key={i}
